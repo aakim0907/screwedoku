@@ -1,4 +1,5 @@
 require_relative "tile"
+require 'byebug'
 
 class Board
   attr_reader :grid
@@ -10,6 +11,7 @@ class Board
   end
 
   def self.from_file(filename)
+    #debugger
     rows = File.readlines(filename).map(&:chomp)
     tiles = rows.map do |row|
       nums = row.split("").map { |char| Integer(char) }
@@ -53,7 +55,8 @@ class Board
   alias_method :rows, :size
 
   def solved?
-    rows.all? { |row| solved_set?(row) } &&
+    #debugger
+    @grid.all? { |row| solved_set?(row) } &&
       columns.all? { |col| solved_set?(col) } &&
       squares.all? { |square| solved_set?(square) }
   end
